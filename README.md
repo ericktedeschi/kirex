@@ -1,6 +1,10 @@
-Capsman - Stands for Capabilities Manager
+Kirex
+=====
 
-This is an WordPress plugin to help manage Roles and Capabilities.
+A framework to create WordPress Plugins.
+The main goal is to provide an great set of classes.
 
-- Supports Multisite/Network
-- Simple and functional (don't create any table or modify your database)
+* Requires PHP 5.3+
+* Easy to use
+* Extensible
+
