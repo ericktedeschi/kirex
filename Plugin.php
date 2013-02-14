@@ -74,6 +74,9 @@ class Kirex_Plugin {
         if (null === self::$_instance) {
             $c = get_called_class();
             self::$_instance = new $c();
+            if (is_callable(array(self::$_instance, 'init'))) {
+                self::$_instance->init();
+            }
         }
         return self::$_instance;
     }
@@ -88,11 +91,14 @@ class Kirex_Plugin {
         // Depending on the type of the action, the Kirex_Plugin may
         // do something or call a specific method... or a method defined on an 
         // interface
-            $action->setKirexPlugin($this);
-            if (method_exists($action, 'init')) {
-                $action->init();
-            }
-            $this->_actions[] = $action;
+        if (!($action instanceof Kirex_Controller_Interface)) {
+            throw new InvalidArgumentException('The object passed must be instance of Kirex_Controller_Interface');
+        }
+        $action->setKirexPlugin($this);
+        if (method_exists($action, 'init')) {
+            $action->init();
+        }
+        $this->_actions[] = $action;
 
         return $this;
     }

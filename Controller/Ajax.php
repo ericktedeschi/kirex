@@ -20,8 +20,10 @@ abstract class Kirex_Controller_Ajax implements Kirex_Controller_Interface {
         }
         // TODO Validate prefix as a var name
         $this->_prefix = $prefix;
+        if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest')) {
+            $this->scanAjaxMethods();
+        }
 
-        $this->scanAjaxMethods();
     }
 
     /**
